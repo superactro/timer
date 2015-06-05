@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Hello World!</title>
+    <link rel="stylesheet" href="style.css">
+    <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+    <script>
+    var myDataRef = new Firebase('https://x2x6occconk.firebaseio-demo.com/');
+    </script>
+    <!-- <input type='text' id='nameInput' placeholder='Name'>
+    <input type='text' id='messageInput' placeholder='Message'>
+    -->
+    <!-- <script>
+
+    var myDataRef = new Firebase('https://x2x6occconk.firebaseio-demo.com/');
+    $('#messageInput').keypress(function(e) {
+        if (e.keyCode == 13) {
+            var name = $('#nameInput').val();
+            var text = $('#messageInput').val();
+
+            // set only one message
+            // myDataRef.set({name: name, text: text});
+
+            // push
+            myDataRef.push({
+                name: name,
+                text: text
+            });
+
+            $('#messageInput').val('');
+            var message = snapshot.val();
+            console.log(message.name);
+            //displayChatMessage(message.name, message.text);
+        }
+    });
+
+    myDataRef.on('child_added', function(snapshot) {
+        //We'll fill this in later.
+    });
+    console.log('hello123');
+    </script>
+    -->
+    <button id="topBtn">30 min</button>
+    <div id="load"></div>
+    <button id="botBtn">start timer</button>
+    <script>
+    $(function() {
+
+        var timerOn = false;
+
+        $("#botBtn").click(function() {
+
+            console.log("click");
+            if (timerOn == true) {
+                return;
+            }
+            $('#botBtn').text('reset');
+            startCount(11000, 10);
+            timerOn = true;
+
+
+        });
+    });
+
+
+    // timer
+    function startCount(time, sec) {
+
+        function pad(val) {
+            //return val >= 10 ? val : "0" + val;
+        }
+        var timer = setInterval(function() {
+            //var a = pad(++sec % 60);
+            //var b =  pad(parseInt(sec / 60, 20));
+
+            $('#topBtn').stop().text(--sec);
+            console.log(sec);
+            if (sec < 1) {
+                timerOn = false;
+                console.log('bum');
+                $('#botBtn').text('start');
+            }
+        }, 1000);
+
+        setTimeout(function() {
+            clearInterval(timer);
+        }, time);
+    }
+    </script>
+</body>
+
+</html>
